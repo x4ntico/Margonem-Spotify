@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify Auth Callback</title>
+    <script>
+        // Odczyt tokenu i stanu z URL
+        const hash = window.location.hash.substring(1);
+        const params = new URLSearchParams(hash);
+        const accessToken = params.get('access_token');
+        const state = params.get('state'); // Oryginalny świat Margonem
+
+        if (accessToken && state) {
+            // Przekazanie tokenu do strony dodatku
+            const redirectUrl = `${state}?access_token=${accessToken}`;
+            window.location.href = redirectUrl; // Przekierowanie na świat Margonem
+        } else {
+            document.body.innerHTML = '<h1>Błąd autoryzacji</h1>';
+        }
+    </script>
+</head>
+<body>
+    <h1>Przekierowywanie...</h1>
+</body>
+</html>
